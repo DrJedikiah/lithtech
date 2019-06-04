@@ -1,11 +1,6 @@
 project(EXE_Lithtech)
 
 add_definitions(-DDE_LOCAL_SERVERBIND -DDE_CLIENT_COMPILE -DDSNDMGR_NO_MFC -DDIRECTENGINE_COMPILE -DMODEL_SUPPORT_ABC)
-if(CMAKE_CL_64)
-	link_directories("C:\\Program Files (x86)\\Microsoft DirectX SDK (August 2007)\\Lib\\x64")
-else(CMAKE_CL_64)
-	link_directories("C:\\Program Files (x86)\\Microsoft DirectX SDK (August 2007)\\Lib\\x86")
-endif(CMAKE_CL_64)
 
 add_executable(${PROJECT_NAME} WIN32
 	../controlfilemgr/controlfilemgr.cpp
@@ -217,6 +212,11 @@ if(WIN32)
 endif(WIN32)
 
 if(ENABLE_DIRECTX)	# FIXME: set to find DirectX path
+    if(CMAKE_CL_64)
+        link_directories("C:\\Program Files (x86)\\Microsoft DirectX SDK (August 2007)\\Lib\\x64")
+    else(CMAKE_CL_64)
+        link_directories("C:\\Program Files (x86)\\Microsoft DirectX SDK (August 2007)\\Lib\\x86")
+    endif(CMAKE_CL_64)
 	include_directories(../../libs/dshow
 		"C:\\Program Files (x86)\\Microsoft DirectX SDK (August 2007)\\Include")
 		#if(CMAKE_CL_64)
