@@ -142,7 +142,7 @@ add_executable(${PROJECT_NAME} WIN32
 	../kernel/src/sys/win/render.cpp
 	../server/src/s_client.cpp
 	../server/src/s_concommand.cpp
-	../server/src/S_Intersect.cpp
+	../server/src/s_intersect.cpp
 	../server/src/s_net.cpp
 	../server/src/s_object.cpp
 	../server/src/server_consolestate.cpp
