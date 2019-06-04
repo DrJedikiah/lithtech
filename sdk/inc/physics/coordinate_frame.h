@@ -986,11 +986,11 @@ public:
 
 	Used For: Math.
 	*/
-	const LTVector3f TransformPointToParent( const LTVector3f& p ) const
-	{
-		//transform the coordinate vector and Translate by this origin
-		return TransformVectorToParent( p ) + m_O;
-	}
+//	const LTVector3f TransformPointToParent( const LTVector3f& p ) const
+//	{
+//		//transform the coordinate vector and Translate by this origin
+//		return TransformVectorToParent( p ) + m_O;
+//	}
 
 	/*!
 	\param	B	another LTCoordinateFrame
@@ -1093,7 +1093,7 @@ public:
 		const LTMatrix3f M = RotationMatrix( a, u );
 		const LTMatrix3f v = M * (this->m_O - p0);
 
-		this->m_O = p0 + (const LTVector3f)v;//new position
+		this->m_O = p0 + v.A[0];//new position
 
 		//rotate the local axes
 		this->Rotate( a, u );

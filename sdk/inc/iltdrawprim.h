@@ -37,6 +37,8 @@
 
 #ifdef _WIN32
 #define SCREEN_NEAR_Z       0.0
+#else
+#define SCREEN_NEAR_Z       0.0
 #endif
 
 

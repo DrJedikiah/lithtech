@@ -7,6 +7,7 @@
 #include "vkdefs.h"
 #include "ctype.h"
 #include <locale.h>
+#include <cstdint>
 
 
 const uint16 CLTGUIEditCtrl::kMaxLength = 64;
