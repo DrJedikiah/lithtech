@@ -42,11 +42,11 @@ typedef char* LPSTR;
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
-#include <ostream.h>
+#include <ostream>
 #include <sys/time.h>
 #include <sys/timeb.h>
 #include <sys/time.h>
-#include <strstream.h>
+#include <strstream>
 #include <endian.h>
 #include <arpa/inet.h>
 #include <netdb.h>

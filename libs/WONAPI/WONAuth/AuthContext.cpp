@@ -1,3 +1,4 @@
+#include <cstring>
 #include "WONAPI.h"
 #include "AuthContext.h"
 #include "WONCommon/WriteBuffer.h"

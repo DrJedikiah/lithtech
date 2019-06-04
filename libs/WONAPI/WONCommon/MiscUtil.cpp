@@ -14,6 +14,7 @@ namespace WONAPI
 //----------------------------------------------------------------------------
 bool Browse(const std::string& sURL)
 {
+#ifdef __WIN32
 	string              sBrowser;
 	BOOL                bOK;
 	STARTUPINFO         aStartupInfo;
@@ -38,6 +39,9 @@ bool Browse(const std::string& sURL)
 	}
 
 	return bOK == TRUE;
+#else
+	return system(("xdg-open " + sURL).c_str()) == 0;
+#endif
 }
 
 
@@ -46,6 +50,7 @@ bool Browse(const std::string& sURL)
 //----------------------------------------------------------------------------
 bool GetBrowserCommandLineFromRegistry(std::string& sBrowser)
 {
+#ifdef __WIN32
 	LONG  nLong;
 	HKEY  hKey;
 	TCHAR sValue[MAX_PATH];
@@ -105,6 +110,23 @@ bool GetBrowserCommandLineFromRegistry(std::string& sBrowser)
 	}
 
 	return sBrowser.length() > 0;
+#else
+	FILE *output = popen("xdg-settings get default-web-browser", "r");
+
+	if (!output)
+	{
+		return false;
+	}
+
+
+	char buffer[1024];
+	char *line_p = fgets(buffer, sizeof(buffer), output);
+	int ret_code = pclose(output);
+	if (ret_code != 0 || line_p == NULL)
+		return false;
+	sBrowser = buffer;
+	return true;
+#endif
 }
 
 } // namespace

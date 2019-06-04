@@ -1,3 +1,4 @@
+#include <cstring>
 #include "ByteBuffer.h"
 using namespace WONAPI;
 

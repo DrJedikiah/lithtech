@@ -1,5 +1,6 @@
 #include "FTPGetOp.h"
 #include <sys/stat.h>
+#include <cstring>
 
 using namespace WONAPI;
 using namespace std;

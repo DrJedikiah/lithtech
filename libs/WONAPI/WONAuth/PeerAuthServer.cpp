@@ -1,3 +1,4 @@
+#include <cstring>
 #include "PeerAuthServer.h"
 #include "WONCommon/WriteBuffer.h"
 

@@ -3,7 +3,7 @@
 #include "WONSocket/SocketOp.h"
 #include <time.h>
 #include <sys/stat.h>
-
+#include <cstring>
 
 using namespace std;
 using namespace WONAPI;

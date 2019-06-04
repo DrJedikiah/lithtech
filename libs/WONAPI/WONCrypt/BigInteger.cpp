@@ -2,6 +2,7 @@
 #include <memory>
 #include <algorithm>
 #include <math.h>
+#include <cstring>
 
 #include "BigInteger.h"
 

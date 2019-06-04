@@ -542,7 +542,11 @@ static void GenerateID(char *keyval)
 }
 
 #ifndef PATH_MAX
+#ifdef __WIN32
 #define PATH_MAX MAX_PATH
+#else
+#define PATH_MAX 0x00000104
+#endif
 #endif
 
 

@@ -5,6 +5,7 @@
 #include "AsyncSocket.h"
 #include "NetStats.h"
 #include <time.h>
+#include <cstring>
 using namespace WONAPI;
 
 #if (defined _LINUX) && (__GLIBC__ == 2) && (__GLIBC_MINOR__ >= 1) // MSG_NOSIGNAL supposedly broken for glibc-2.0
