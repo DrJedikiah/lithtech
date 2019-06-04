@@ -47,7 +47,8 @@ void CString::FormatV(LPCTSTR pFormat, va_list args)
 	if (!pFormat)
 		return;
 
-	va_list argListSave = args;
+	va_list argListSave;
+	va_copy(argListSave, args);
 
 	// make a guess at the maximum length of the resulting string
 	int nMaxLen = 0;
@@ -519,23 +520,23 @@ int CString::Compare(LPCTSTR lpsz) const
 	return strcmp(GetBuffer(), lpsz); 
 }
 
-int CString::CompareNoCase(LPCTSTR lpsz) const 
-{ 
-	return stricmp(GetBuffer(), lpsz); 
-}
-
-void CString::MakeUpper()
-{
-	_strupr( GetBuffer( ));
-}
-
-void CString::MakeLower()
-{
-	_strlwr( GetBuffer( ));
-}
-
-void CString::MakeReverse()
-{
-	_strrev( GetBuffer( ));
-}
+//int CString::CompareNoCase(LPCTSTR lpsz) const
+//{
+//	return stricmp(GetBuffer(), lpsz);
+//}
+//
+//void CString::MakeUpper()
+//{
+//	_strupr( GetBuffer( ));
+//}
+//
+//void CString::MakeLower()
+//{
+//	_strlwr( GetBuffer( ));
+//}
+//
+//void CString::MakeReverse()
+//{
+//	_strrev( GetBuffer( ));
+//}
 
