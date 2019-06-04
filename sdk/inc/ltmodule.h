@@ -253,7 +253,7 @@ class/instance name combination.
 typedef struct {
     //marks the beginning of the structure.
     char marker[32];
-    int32 marker_int;
+    uint32 marker_int;
     char interface_name[64];
     char instance_name[64];
     char implementation[64];
@@ -356,7 +356,7 @@ typedef struct {
     //marks the beginning of the structure.
     char marker[32];
     //non-string marker
-    int32 marker_int;
+    uint32 marker_int;
     char interface_name[64];
     char instance_name[64];
     int32 version;

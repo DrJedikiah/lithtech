@@ -29,6 +29,12 @@ On the PC, this is the default color of a CUIWidget.
 */
 	#define CUI_DEFAULT_WIDGET_COLOR	0x00FFFFFF
 
+#else
+
+#define	CUI_SYSTEM_OPAQUE	0xFF000000
+#define CUI_DEFAULT_FONT_COLOR		0x00FFFFFF
+#define CUI_DEFAULT_WIDGET_COLOR	0x00FFFFFF
+
 #endif
 
 

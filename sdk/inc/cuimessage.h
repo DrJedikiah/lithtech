@@ -16,6 +16,7 @@
 
 
 #ifndef __CUI_H__
+#include <cstdint>
 #include "cui.h"
 #endif
 
@@ -150,13 +151,13 @@ Used for: Text and UI.   */
 One of two data storage members.
 
 Used for: Text and UI.   */
-		uint32			m_Data1;
+		uintptr_t			m_Data1;
 
 /*!  
 One of two data storage members.
 
 Used for: Text and UI.   */
-		uint32			m_Data2;
+		uintptr_t			m_Data2;
 		
 };
 
