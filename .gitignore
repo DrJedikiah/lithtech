@@ -1,3 +1,9 @@
 Build
 Rez
 *.REZ
+CMakeCache.txt
+CMakeFiles/
+*.o
+cmake_install.cmake
+cmake-build-*/
+.idea/
