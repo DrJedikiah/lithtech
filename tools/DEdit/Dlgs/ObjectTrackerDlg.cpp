@@ -9,7 +9,7 @@
 #include "ltamgr.h"
 #include "editprojectmgr.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -353,7 +353,7 @@ void CObjectTrackerDlg::OnButtonSave()
 	if(Dlg.DoModal() != IDOK)
 		return;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(Dlg.GetPathName());
 #else
 	ofstream OutFile(Dlg.GetPathName());
@@ -374,7 +374,7 @@ void CObjectTrackerDlg::OnButtonSave()
 	{
 		CString sText;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << m_Objects[nCurrClass].m_sClass << ", " << m_Objects[nCurrClass].m_nTotalRefCount << std::endl;
 #else
 		OutFile << m_Objects[nCurrClass].m_sClass << ", " << m_Objects[nCurrClass].m_nTotalRefCount << endl;
@@ -384,14 +384,14 @@ void CObjectTrackerDlg::OnButtonSave()
 		{
 			for(uint32 nCurrRef = 0; nCurrRef < m_Objects[nCurrClass].m_References.GetSize(); nCurrRef++)
 			{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 				OutFile << m_Objects[nCurrClass].m_References[nCurrRef].m_sFile << ", " << m_Objects[nCurrClass].m_References[nCurrRef].m_nRefCount << std::endl;
 #else
 				OutFile << m_Objects[nCurrClass].m_References[nCurrRef].m_sFile << ", " << m_Objects[nCurrClass].m_References[nCurrRef].m_nRefCount << endl;
 #endif
 			}
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			OutFile << std::endl;
 #else
 			OutFile << endl;

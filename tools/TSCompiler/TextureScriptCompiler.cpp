@@ -1,7 +1,7 @@
 #include "TextureScriptCompiler.h"
 #include "tdguard.h"
 #include <ctype.h>
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <iostream>
 #else
 #include <iostream.h>
@@ -1242,7 +1242,7 @@ void CTextureScriptCompiler::SaveTree(CTSNode* pNode)
 	WriteToBuffer(&nVal, sizeof(nVal));
 }
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #define DISPLAY_NODE_OP(n)		if(pNode->m_nOp == n) { std::cout << #n ; }
 #else
 #define DISPLAY_NODE_OP(n)		if(pNode->m_nOp == n) { cout << #n ; }
@@ -1259,7 +1259,7 @@ void CTextureScriptCompiler::ShowDebugTree(CTSNode* pNode, uint32 nDepth)
 	//tab in
 	for(uint32 nCurrTab = 0; nCurrTab < nDepth; nCurrTab++)
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << '\t';
 #else
 		cout << '\t';
@@ -1282,7 +1282,7 @@ void CTextureScriptCompiler::ShowDebugTree(CTSNode* pNode, uint32 nDepth)
 	DISPLAY_NODE_OP(COMPOP_INVALID);
 
 	//now other information
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << " -> " << pNode->m_nStoreInto << " v" << pNode->m_nVar << std::endl;
 #else
 	cout << " -> " << pNode->m_nStoreInto << " v" << pNode->m_nVar << endl;

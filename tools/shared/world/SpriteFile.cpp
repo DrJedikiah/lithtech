@@ -1,7 +1,7 @@
 #include "bdefs.h"
 #include "SpriteFile.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -26,7 +26,7 @@ CSpriteFile::~CSpriteFile()
 bool CSpriteFile::Load(const char* pszFilename)
 {
 	//open up the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream InFile( pszFilename, std::ios::in | std::ios::binary );
 #else
 	ifstream InFile(pszFilename, ios::in | ios::nocreate | ios::binary);
@@ -93,7 +93,7 @@ bool CSpriteFile::Load(const char* pszFilename)
 bool CSpriteFile::Save(const char* pszFilename) const
 {
 	//open up the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(pszFilename, std::ios::out | std::ios::binary);
 #else
 	ofstream OutFile(pszFilename, ios::out | ios::binary);

@@ -9,7 +9,7 @@
 #include "PackerPropList.h"
 #include "RegistryUtil.h"
 #include "PackerRegLoc.h"
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -469,7 +469,7 @@ void CBackEndDialog::OnSaveLog()
 bool CBackEndDialog::SaveLogToFile(const char* pszFilename)
 {
 	//open up the file and write out all the tasks and all their messages
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(pszFilename);
 #else
 	ofstream OutFile(pszFilename);

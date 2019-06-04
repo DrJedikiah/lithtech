@@ -11,7 +11,7 @@
 #include "ProjectBar.h"
 #include "streamsim.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #include <iostream>
 #else
@@ -243,7 +243,7 @@ void CLevelTexturesDlg::OnButtonSave()
 	if(Dlg.DoModal() != IDOK)
 		return;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(Dlg.GetPathName());
 #else
 	ofstream OutFile(Dlg.GetPathName());
@@ -279,7 +279,7 @@ void CLevelTexturesDlg::OnButtonSave()
 
 		OutFile << pszColName << ", ";
 	}
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	OutFile << std::endl;
 #else
 	OutFile << endl;
@@ -292,7 +292,7 @@ void CLevelTexturesDlg::OnButtonSave()
 		{
 			OutFile << GetTextureList()->GetItemText(nCurrItem, nColOrder[nCurrCol]) << ", ";
 		}
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << std::endl;
 #else
 		OutFile << endl;
@@ -300,7 +300,7 @@ void CLevelTexturesDlg::OnButtonSave()
 	}
 
 	//now save out the stats
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	OutFile << std::endl;
 	OutFile << "Stat, Value" << std::endl;
 #else
@@ -314,7 +314,7 @@ void CLevelTexturesDlg::OnButtonSave()
 		{
 			OutFile << GetStatsList()->GetItemText(nCurrItem, nCurrCol) << ", ";
 		}
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << std::endl;
 #else
 		OutFile << endl;

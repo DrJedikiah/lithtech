@@ -4,7 +4,7 @@
 #include "editprojectmgr.h"
 #include "edithelpers.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -176,7 +176,7 @@ void CEditEffectGroupDlg::LoadScript(const char* pszName, uint32 nStage)
 	HideVariables(nStage);
 
 	//ok, try and open up this file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream InFile(pszName, std::ios::in | std::ios::binary);
 #else
 	ifstream InFile(pszName, ios::nocreate | ios::in | ios::binary);
@@ -271,7 +271,7 @@ void CEditEffectGroupDlg::HideVariables(uint32 nStage)
 bool CEditEffectGroupDlg::LoadEffectGroup()
 {
 	//try and open up the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream InFile(GetEffectGroupDir() + m_sLoadEffect, std::ios::binary | std::ios::in );
 #else
 	ifstream InFile(GetEffectGroupDir() + m_sLoadEffect, ios::binary | ios::in | ios::nocreate);
@@ -467,7 +467,7 @@ bool CEditEffectGroupDlg::SaveEffectGroup()
 	_mkdir(GetEffectGroupDir());
 
 	//try and open up the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(sName, std::ios::binary | std::ios::out);
 #else
 	ofstream OutFile(sName, ios::binary | ios::out);

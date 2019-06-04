@@ -2,7 +2,7 @@
 #include "TextureScriptCompiler.h"
 #include "tdguard.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <iostream>
 #include <fstream>
 #else
@@ -25,7 +25,7 @@ void ReportCompilerErrorCB(const char* pszMessage, ...)
 
 	va_end(VList);
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << pszMsgBuffer << std::endl;
 #else
 	cout << pszMsgBuffer << endl;
@@ -38,7 +38,7 @@ void ReportCompilerErrorCB(const char* pszMessage, ...)
 static bool CompileFile(const char* pszFile, const char* pszOut)
 {
 	//alright, let us first load up this file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream InFile(pszFile, std::ios::in );
 #else
 	ifstream InFile(pszFile, ios::in | ios::nocreate);
@@ -46,7 +46,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 
 	if(!InFile)
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error: Unable to open " << pszFile << " for reading. Please verify it exists" << std::endl;
 #else
 		cout << "Error: Unable to open " << pszFile << " for reading. Please verify it exists" << endl;
@@ -57,7 +57,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	//now seek to the end in order to determine its size
 
 	//move it to the end
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	InFile.seekg(0, std::ios::end);
 #else
 	InFile.seekg(0, ios::end);
@@ -67,7 +67,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	long nFileSize = InFile.tellg();
 
 	//ok, now move back to the beginning
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	InFile.seekg(0, std::ios::beg);
 #else
 	InFile.seekg(0, ios::beg);
@@ -80,7 +80,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	if(!pszFileData)
 	{
 		//no memory
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error: Unable to allocate " << nFileSize << " bytes for storing the script" << std::endl;
 #else
 		cout << "Error: Unable to allocate " << nFileSize << " bytes for storing the script" << endl;
@@ -99,7 +99,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	CTextureScriptCompiler Compiler;
 	if(!Compiler.CompileScript(pszFileData, ReportCompilerErrorCB, pOutput, nOutputSize))
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Errors were encountered when compiling. Compile unsuccessful." << std::endl;
 #else
 		cout << "Errors were encountered when compiling. Compile unsuccessful." << endl;
@@ -109,7 +109,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	}
 
 	//successful compilation, let us now write out the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(pszOut, std::ios::out | std::ios::binary);
 #else
 	ofstream OutFile(pszOut, ios::out | ios::binary);
@@ -118,7 +118,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	if(!OutFile)
 	{
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error opening file " << pszOut << " for output. Make sure it is valid and not read only" << std::endl;
 #else
 		cout << "Error opening file " << pszOut << " for output. Make sure it is valid and not read only" << endl;
@@ -129,7 +129,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	}
 
 	//ok, we have the file open, let us write it out
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	OutFile.write((char*)pOutput, nOutputSize);
 #else
 	OutFile.write(pOutput, nOutputSize);
@@ -140,7 +140,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	delete [] pOutput;
 
 	//report success
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << pszFile << " successfully compiled." << std::endl;
 #else
 	cout << pszFile << " successfully compiled." << endl;
@@ -152,7 +152,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 //displays proper command line usage of this tools
 static void DisplayUsage(const char* pszError)
 {
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << "TSCompiler /file <file to compile> [/out <name of output file>] [/help]" << std::endl;
 	std::cout << std::endl;
 	std::cout << pszError << std::endl;
@@ -207,7 +207,7 @@ int main(int nArgCount, char** ppArgs)
 			stricmp(pszOptName, "help"))
 		{
 			DisplayUsage("");
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::cout << "Unknown option: " << pszOptName << std::endl;
 #else
 			cout << "Unknown option: " << pszOptName << endl;

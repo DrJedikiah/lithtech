@@ -61,7 +61,7 @@ public:
 	bool			Save(const char* pszFilename) const;
 
 	//saves the database to a specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	void			Save(std::ostream& OutFile) const;
 #else
 	void			Save(ostream& OutFile) const;
@@ -75,7 +75,7 @@ public:
 	bool			Load(const char* pszFilename, bool bClearKeys);
 
 	//loads the database from a specified stream. See comments above
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	bool			Load(std::istream& InFile, bool bClearKeys);
 #else
 	bool			Load(istream& InFile, bool bClearKeys);

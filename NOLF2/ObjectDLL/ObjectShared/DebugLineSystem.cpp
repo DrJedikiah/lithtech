@@ -16,7 +16,7 @@
 #include "DebugLine.h"
 #include "MsgIds.h"
 #include "LTObjRef.h"
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #	include "ObjectTemplateMgr.h"
 #endif // VC7
 
@@ -123,7 +123,7 @@ namespace LineSystem
 			  pLineSystem(0) {}
 	};
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	typedef std::hash_map< std::string, SystemEntry, ObjectTemplateMgrHashCompare > SystemMap;
 #else
 	typedef std::hash_map< std::string, SystemEntry > SystemMap;

@@ -290,14 +290,14 @@ bool CHotKey::SetDescription(const char* pszDescription)
 
 
 //saves the hotkey to the specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 void CHotKey::Save(std::ostream& OutFile) const
 #else
 void CHotKey::Save(ostream& OutFile) const
 #endif
 {
 	//write out the event name
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	OutFile << strlen(GetEventName()) << std::endl; 
 	OutFile << GetEventName() << std::endl;
 
@@ -327,7 +327,7 @@ void CHotKey::Save(ostream& OutFile) const
 		//write out the number of events in the current list
 		uint32 nNumEvents = pLists[nCurrList]->GetSize();
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << nNumEvents << std::endl;
 #else
 		OutFile << nNumEvents << endl;
@@ -338,7 +338,7 @@ void CHotKey::Save(ostream& OutFile) const
 			//cache the event so we don't have to use this ugly thing over and over
 			CUIEvent& Event = *((*pLists[nCurrList])[nCurrEvent]);
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			OutFile << Event.GetType() << std::endl;
 			OutFile << GetEventValue(Event) << std::endl;
 #else
@@ -350,7 +350,7 @@ void CHotKey::Save(ostream& OutFile) const
 }
 
 //loads the hotkey from the specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 bool CHotKey::Load(std::istream& InFile)
 #else
 bool CHotKey::Load(istream& InFile)
@@ -392,7 +392,7 @@ bool CHotKey::Load(istream& InFile)
 //loads the hotkey from the specified stream, except for the name
 //(this is so the hotkey database can load the name ahead of time
 //and do checks for duplicates)
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 bool CHotKey::Load(std::istream& InFile, const char* pszName)
 #else
 bool CHotKey::Load(istream& InFile, const char* pszName)

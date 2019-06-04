@@ -21,7 +21,7 @@
 #include "uievent.h"
 #include "genregmgr.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <iostream>
 #else
 #include <iostream.h>
@@ -87,7 +87,7 @@ public:
 	bool		SetDescription(const char* pszDescription);
 
 	//saves the hotkey to the specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	void		Save(std::ostream& OutFile) const;
 #else
 	void		Save(ostream& OutFile) const;
@@ -105,7 +105,7 @@ public:
 	bool		IsUserChangable() const;
 
 	//loads the hotkey from the specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	bool		Load(std::istream& InFile);
 #else
 	bool		Load(istream& InFile);
@@ -113,7 +113,7 @@ public:
 	//loads the hotkey from the specified stream, except for the name
 	//(this is so the hotkey database can load the name ahead of time
 	//and do checks for duplicates)
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	bool		Load(std::istream& InFile, const char* pszName);
 #else
 	bool		Load(istream& InFile, const char* pszName);

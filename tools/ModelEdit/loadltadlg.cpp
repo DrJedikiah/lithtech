@@ -10,7 +10,7 @@
 
 
 //for writing out the log file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -78,7 +78,7 @@ void CLoadLTADlg::OnSaveLoadLog()
 		((CEdit*)GetDlgItem(IDC_LOADLOG))->GetWindowText(sLogText);
 
 		//open up the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::ofstream OutFile(Dlg.GetPathName());
 #else
 		ofstream OutFile(Dlg.GetPathName());

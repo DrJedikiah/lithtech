@@ -85,7 +85,7 @@ protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	afx_msg void OnActivateApp(BOOL bActive, DWORD hTask);
 #else
 	afx_msg void OnActivateApp(BOOL bActive, HTASK hTask);

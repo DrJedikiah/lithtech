@@ -13,7 +13,7 @@
 #include <afxtempl.h>
 #include "Resource.h"
 #include "server_interface.h"
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <strstream>
 #else
 #include <strstrea.h>

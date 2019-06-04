@@ -127,7 +127,7 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 //
 //------------------------------------------------------------------
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 void CMainFrame::OnActivateApp(BOOL bActive, DWORD hTask) 
 #else
 void CMainFrame::OnActivateApp(BOOL bActive, HTASK hTask) 

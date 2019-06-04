@@ -1,7 +1,7 @@
 #include "hotkeydb.h"
 #include "rvtracker.h"
 #include "globalhotkeydb.h"
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #include <istream>
 #else
@@ -99,7 +99,7 @@ bool CHotKeyDB::RemoveHotKey(const char* pszHotKeyName)
 bool CHotKeyDB::Save(const char* pszFilename) const
 {
 	//open the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(pszFilename);
 #else
 	ofstream OutFile(pszFilename);
@@ -121,14 +121,14 @@ bool CHotKeyDB::Save(const char* pszFilename) const
 }
 
 //saves the database to a specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 void CHotKeyDB::Save(std::ostream& OutFile) const
 #else
 void CHotKeyDB::Save(ostream& OutFile) const
 #endif
 {
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	OutFile << GetNumHotKeys() << std::endl;
 #else
 	OutFile << GetNumHotKeys() << endl;
@@ -144,7 +144,7 @@ void CHotKeyDB::Save(ostream& OutFile) const
 bool CHotKeyDB::Load(const char* pszFilename, bool bClearKeys)
 {
 	//open the file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream InFile(pszFilename);
 #else
 	ifstream InFile(pszFilename);
@@ -166,7 +166,7 @@ bool CHotKeyDB::Load(const char* pszFilename, bool bClearKeys)
 }
 
 //loads the database from a specified stream
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 bool CHotKeyDB::Load(std::istream& InFile, bool bClearKeys)
 #else
 bool CHotKeyDB::Load(istream& InFile, bool bClearKeys)

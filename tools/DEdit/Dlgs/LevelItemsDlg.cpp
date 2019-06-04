@@ -3,7 +3,7 @@
 #include "levelitemsdlg.h"
 #include "edithelpers.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -462,7 +462,7 @@ void CLevelItemsDlg::OnSave()
 	if(Dlg.DoModal() != IDOK)
 		return;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(Dlg.GetPathName());
 #else
 	ofstream OutFile(Dlg.GetPathName());
@@ -476,7 +476,7 @@ void CLevelItemsDlg::OnSave()
 		return;
 	}
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	OutFile << "Item, Total, Object, Type, Count" << std::endl;
 #else
 	OutFile << "Item, Total, Object, Type, Count" << endl;
@@ -487,7 +487,7 @@ void CLevelItemsDlg::OnSave()
 	{
 		CItem& Item = m_Items[nCurrItem];
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << Item.m_sName << ", " << Item.m_nCount << std::endl;
 #else
 		OutFile << Item.m_sName << ", " << Item.m_nCount << endl;
@@ -497,7 +497,7 @@ void CLevelItemsDlg::OnSave()
 		{
 			CItemObject& Object = Item.m_Objects[nCurrObject];
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			OutFile << ",, " << Object.m_sName << ", " << Object.m_sClass << ", " << Object.m_nCount << std::endl;
 #else
 			OutFile << ",, " << Object.m_sName << ", " << Object.m_sClass << ", " << Object.m_nCount << endl;

@@ -12,7 +12,7 @@
 #include "levelerror.h"
 #include "multilinestringdlg.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>

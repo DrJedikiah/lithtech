@@ -1,6 +1,6 @@
 #include "commandlineparser.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <iostream>
 #include <fstream>
 #else
@@ -30,7 +30,7 @@ struct SKeyFrame
 static bool CompileFile(const char* pszFile, const char* pszOut)
 {
 	//open up the input file as a text file
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream InFile(pszFile);
 #else
 	ifstream InFile(pszFile);
@@ -38,7 +38,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 
 	if(!InFile.good())
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error opening " << pszFile << " for input" << std::endl;
 #else
 		cout << "Error opening " << pszFile << " for input" << endl;
@@ -47,7 +47,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	}
 
 	//also open up the output for writing so we don't need intermediate storage
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(pszOut, std::ios::out | std::ios::binary);
 #else
 	ofstream OutFile(pszOut, ios::out | ios::binary);
@@ -55,7 +55,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 
 	if(!OutFile.good())
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error opening " << pszOut << " for output" << std::endl;
 #else
 		cout << "Error opening " << pszOut << " for output" << endl;
@@ -79,7 +79,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	//sanity check
 	if(nNumNodes <= 0)
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Invalid number of nodes found in file: " << nNumNodes << std::endl;
 #else
 		cout << "Invalid number of nodes found in file: " << nNumNodes << endl;
@@ -96,7 +96,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	//sanity check
 	if(nAnimLen <= 0)
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Invalid animation length found in file: " << nAnimLen << std::endl;
 #else
 		cout << "Invalid animation length found in file: " << nAnimLen << endl;
@@ -133,7 +133,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	//check the allocation
 	if(!pFrames)
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error allocating memory" << std::endl;
 #else
 		cout << "Error allocating memory" << endl;
@@ -192,7 +192,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 	pFrames = NULL;
 
 	OutFile.flush();
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << pszOut << " successfully compiled." << std::endl;
 #else
 	cout << pszOut << " successfully compiled." << endl;
@@ -203,7 +203,7 @@ static bool CompileFile(const char* pszFile, const char* pszOut)
 //displays proper command line usage of this tools
 static void DisplayUsage(const char* pszError)
 {
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << "LipCompiler /file <file to compile> [/out <name of output file>] [/help]" << std::endl;
 	std::cout << std::endl;
 	std::cout << pszError << std::endl;
@@ -252,7 +252,7 @@ int main(int nArgCount, char** ppArgs)
 			stricmp(pszOptName, "help"))
 		{
 			DisplayUsage("");
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::cout << "Unknown option: " << pszOptName << std::endl;
 #else
 			cout << "Unknown option: " << pszOptName << endl;

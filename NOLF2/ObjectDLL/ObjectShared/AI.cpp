@@ -3619,7 +3619,7 @@ void CAI::UpdateInfo()
 		else if( g_AIInfoTrack.GetFloat() == 4.0f )
 		{
 			// Show Relations.
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::ostrstream out;
 #else
 			ostrstream out;

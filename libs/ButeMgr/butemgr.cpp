@@ -962,7 +962,7 @@ bool CButeMgr::Tag()
 
 bool CButeMgr::AuxTabItemsSave( char const* pszAttName, CSymTabItem& theItem, void* pContext )
 {
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream* pSaveData = (std::ofstream*)pContext;
 #else
 	ofstream* pSaveData = (ofstream*)pContext;
@@ -1021,7 +1021,7 @@ bool CButeMgr::AuxTabItemsSave( char const* pszAttName, CSymTabItem& theItem, vo
 
 bool CButeMgr::NewTabsSave( const char* pszTagName, TableOfItems& theTabOfItems, void* pContext )
 {
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream* pSaveData = (std::ofstream*)pContext;
 #else
 	ofstream* pSaveData = (ofstream*)pContext;
@@ -1096,20 +1096,20 @@ bool CButeMgr::Save(const char* szNewFileName)
 	if ( m_sAttributeFilename.GetBuffer() == NULL )
 		m_sAttributeFilename = "";
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ifstream is(m_sAttributeFilename, std::ios_base::binary);
 #else
 	ifstream is(m_sAttributeFilename, ios::nocreate | ios::binary);
 #endif // VC7
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::streamoff nFileLength=0;
 #else
 	streamoff nFileLength=0;
 #endif
 	if (is.is_open())
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		is.seekg(0, std::ios_base::end);
 #else
 		is.seekg(0, ios::end);
@@ -1127,7 +1127,7 @@ bool CButeMgr::Save(const char* szNewFileName)
 	char *pssBuf = new char[nFileLength];
 	pssBuf[0] = '\0';
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::strstream ss(pssBuf, nFileLength, std::ios_base::in | std::ios_base::out);
 #else
 	strstream ss(pssBuf, nFileLength, ios::in | ios::out);
@@ -1136,7 +1136,7 @@ bool CButeMgr::Save(const char* szNewFileName)
 	if (m_bCrypt)
 	{
 		m_cryptMgr.Decrypt(is, ss);
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		m_pSaveData = new std::iostream(new std::strstreambuf(nFileLength));
 #else
 		m_pSaveData = new iostream(new strstreambuf(nFileLength));
@@ -1156,13 +1156,13 @@ bool CButeMgr::Save(const char* szNewFileName)
 		is.close();
 
 		if (szNewFileName)
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			m_pSaveData = new std::fstream(szNewFileName, std::ios_base::binary | std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
 #else
 			m_pSaveData = new fstream(szNewFileName, ios::binary | ios::in | ios::out | ios::trunc);
 #endif // VC7
 		else
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			m_pSaveData = new std::fstream(m_sAttributeFilename, std::ios_base::binary | std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
 #else
 			m_pSaveData = new fstream(m_sAttributeFilename, ios::binary | ios::in | ios::out | ios::trunc);
@@ -1184,7 +1184,7 @@ bool CButeMgr::Save(const char* szNewFileName)
 		return false;
 	}
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
     m_pSaveData->flags(m_pSaveData->flags() | std::ios_base::showpoint | std::ios_base::fixed);
 #else
     m_pSaveData->flags(m_pSaveData->flags() | ios::showpoint | ios::fixed);
@@ -1202,13 +1202,13 @@ bool CButeMgr::Save(const char* szNewFileName)
 	if (m_bCrypt)
 	{
 		if (szNewFileName)
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			m_cryptMgr.Encrypt(*m_pSaveData, std::ofstream(szNewFileName, std::ios_base::binary));
 #else
 			m_cryptMgr.Encrypt(*m_pSaveData, ofstream(szNewFileName, ios::binary));
 #endif // VC7
 		else
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			m_cryptMgr.Encrypt(*m_pSaveData, std::ofstream(m_sAttributeFilename, std::ios_base::binary));
 #else
 			m_cryptMgr.Encrypt(*m_pSaveData, ofstream(m_sAttributeFilename, ios::binary));

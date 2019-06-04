@@ -7,7 +7,7 @@
 #include <hash_map>
 
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 
 class ObjectTemplateMgrHashCompare
 {

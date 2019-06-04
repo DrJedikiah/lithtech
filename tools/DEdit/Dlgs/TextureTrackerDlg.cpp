@@ -9,7 +9,7 @@
 #include "ltamgr.h"
 #include "editprojectmgr.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -253,7 +253,7 @@ void CTextureTrackerDlg::OnButtonSave()
 
 	if(Dlg.DoModal() != IDOK)
 		return;
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(Dlg.GetPathName());
 #else
 	ofstream OutFile(Dlg.GetPathName());
@@ -273,7 +273,7 @@ void CTextureTrackerDlg::OnButtonSave()
 	{
 		CString sText;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << m_Textures[nCurrTexture].m_sFilename << ", " << m_Textures[nCurrTexture].m_nTotalRefCount << std::endl;
 #else
 		OutFile << m_Textures[nCurrTexture].m_sFilename << ", " << m_Textures[nCurrTexture].m_nTotalRefCount << endl;
@@ -282,14 +282,14 @@ void CTextureTrackerDlg::OnButtonSave()
 		{
 			for(uint32 nCurrRef = 0; nCurrRef < m_Textures[nCurrTexture].m_References.GetSize(); nCurrRef++)
 			{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 				OutFile << m_Textures[nCurrTexture].m_References[nCurrRef].m_sFile << ", " << m_Textures[nCurrTexture].m_References[nCurrRef].m_nRefCount << std::endl;
 #else
 				OutFile << m_Textures[nCurrTexture].m_References[nCurrRef].m_sFile << ", " << m_Textures[nCurrTexture].m_References[nCurrRef].m_nRefCount << endl;
 #endif
 			}
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			OutFile << std::endl;
 #else
 			OutFile << endl;

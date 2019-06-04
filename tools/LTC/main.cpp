@@ -1,7 +1,7 @@
 #include "commandlineparser.h"
 #include "ltamgr.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <iostream>
 #else
 #include <iostream.h>
@@ -15,7 +15,7 @@
 //prints out the help screen for the tool
 void PrintHelp()
 {
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::cout << "LTC - A tool for compression and decompression of LTA files" << std::endl;
 	std::cout << "Usage: LTC <filename> [-out <file>] [-view] [-verbose] [-help]" << std::endl;
 	std::cout << std::endl;
@@ -98,7 +98,7 @@ int main(int nArgCount, char** ppArgs)
 		{
 			PrintHelp();
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::cout << "Unknown option: " << pszOptName << std::endl;
 #else
 			cout << "Unknown option: " << pszOptName << endl;
@@ -111,7 +111,7 @@ int main(int nArgCount, char** ppArgs)
 	if(Parser.GetNumGlobalParameters() == 0)
 	{
 		PrintHelp();
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "A file to modify must be specified" << std::endl;
 #else
 		cout << "A file to modify must be specified" << endl;
@@ -123,7 +123,7 @@ int main(int nArgCount, char** ppArgs)
 	if(Parser.IsOptionSet("out") && (Parser.GetNumParameters("out") < 1))
 	{
 		PrintHelp();
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "A file name must be specified with -out" << std::endl;
 #else
 		cout << "A file name must be specified with -out" << endl;
@@ -136,7 +136,7 @@ int main(int nArgCount, char** ppArgs)
 	if(Parser.IsOptionSet("view") && Parser.IsOptionSet("out"))
 	{
 		PrintHelp();
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "-view and -out cannot be set. Please select only one." << std::endl;
 #else
 		cout << "-view and -out cannot be set. Please select only one." << endl;
@@ -164,7 +164,7 @@ int main(int nArgCount, char** ppArgs)
 	//make sure we opened it okay
 	if(InFile.IsValid() == false)
 	{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error: Unable to open the file " << pszFilename << std::endl;
 #else
 		cout << "Error: Unable to open the file " << pszFilename << endl;
@@ -180,7 +180,7 @@ int main(int nArgCount, char** ppArgs)
 		//print out the entire file
 		while(InFile.ReadByte(nVal))
 		{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::cout << (char)nVal;
 #else
 			cout << (char)nVal;
@@ -217,7 +217,7 @@ int main(int nArgCount, char** ppArgs)
 		if((nCurrChar < 0) || (	stricmp(&pszFilename[nCurrChar], ".LTA") && 
 								stricmp(&pszFilename[nCurrChar], ".LTC")))
 		{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::cout << "Error: The input file does not have a proper extension." << std::endl;
 			std::cout << "Either specify an output filename or correct the extension." << std::endl;
 #else
@@ -238,7 +238,7 @@ int main(int nArgCount, char** ppArgs)
 	//make sure it succeeded
 	if(OutFile.IsValid() == false)
 	{
-#if _MSC_VER >= 1300 
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		std::cout << "Error: Unable to open file " << pszOutFile << " for writing." << std::endl;
 #else
 		cout << "Error: Unable to open file " << pszOutFile << " for writing." << endl;
@@ -254,7 +254,7 @@ int main(int nArgCount, char** ppArgs)
 	{
 		if(OutFile.WriteByte(nVal) == false)
 		{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			std::cout << "Error: Unable to write to " << pszOutFile << std::endl;
 			std::cout << "Disk may be full." << std::endl;
 #else

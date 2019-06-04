@@ -9,7 +9,7 @@
 #include "ltamgr.h"
 #include "editprojectmgr.h"
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 #include <fstream>
 #else
 #include <fstream.h>
@@ -253,7 +253,7 @@ void CPrefabTrackerDlg::OnButtonSave()
 	if(Dlg.DoModal() != IDOK)
 		return;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 	std::ofstream OutFile(Dlg.GetPathName());
 #else
 	ofstream OutFile(Dlg.GetPathName());
@@ -274,7 +274,7 @@ void CPrefabTrackerDlg::OnButtonSave()
 	{
 		CString sText;
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 		OutFile << m_Prefabs[nCurrPrefab].m_sFilename << ", " << m_Prefabs[nCurrPrefab].m_nTotalRefCount << std::endl;
 #else
 		OutFile << m_Prefabs[nCurrPrefab].m_sFilename << ", " << m_Prefabs[nCurrPrefab].m_nTotalRefCount << endl;
@@ -284,14 +284,14 @@ void CPrefabTrackerDlg::OnButtonSave()
 		{
 			for(uint32 nCurrRef = 0; nCurrRef < m_Prefabs[nCurrPrefab].m_References.GetSize(); nCurrRef++)
 			{
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 				OutFile << m_Prefabs[nCurrPrefab].m_References[nCurrRef].m_sFile << ", " << m_Prefabs[nCurrPrefab].m_References[nCurrRef].m_nRefCount << std::endl;
 #else
 				OutFile << m_Prefabs[nCurrPrefab].m_References[nCurrRef].m_sFile << ", " << m_Prefabs[nCurrPrefab].m_References[nCurrRef].m_nRefCount << endl;
 #endif
 			}
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || defined(__gcc__) || defined(__clang__)
 			OutFile << std::endl;
 #else
 			OutFile << endl;
